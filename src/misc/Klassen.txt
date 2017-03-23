@@ -1,0 +1,43 @@
+content:
+---------
+Player:
+	String: name
+	Image: photo
+	int: score
+	Team: team
+
+Team:
+	String: name
+	Player[]: players
+	int: victoryPoints
+	-
+	public int getScore
+	
+Poll:
+	String: question
+	Answer[]: answers
+	
+	Answer:
+		String: answer
+		Player: player	
+
+Game:
+	String: titel
+	String[]: content
+	Image[]: images
+
+Manager:
+	Poll[]: polls
+	Team[2]: teams
+	Game[]: games
+	
+ReadWrite:
+
+Main
+	
+
+
+frame:
+------
+MainFrame
+MainFramePrinter

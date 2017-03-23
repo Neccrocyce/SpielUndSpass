@@ -1,0 +1,62 @@
+Funktionen mit app benötigt:
+----------------------------
+antworten anonym, einzeln
+
+mehrere antworten gleichzeitg
+
+buzzer
+
+zufällige auswahl von komponenten versteckt
+
+mörderspiel auswähler
+
+zeichnen
+
+
+Funktionen mit app tatsächlich:
+-----------------------
+Umfrage (personen gezielt wählbar) anonym/offen, versteckt/sichtbar
+Buzzer
+Anzeige aus zufällig gewählten Komponenten einzeln, versteckt
+Zeichnen
+
+
+Funktionen Hauptschirm benötigt:
+-------------------------------
+Text (Spielerklärung) anzeigen
+antworten der einzelnen Spieler anzeigen
+antworten groß anzeigen
+Spielpunkte pro Spieler
+Spielpunkte pro Team
+Siegpunkte pro Team
+Stoppuhr
+Bild anzeigen
+anzeigen zufällig ermittelteten aus komponenten
+Anzeigen von Notizen des Gamemasters
+zufälliges auswählen von spielern
+Anzeigen des gebuzzerten Spielers
+Speichern der umfragen
+
+Funktionen Hauptschirm tatsächlich:
+-----------------------------------
+Anzeige: (Titel des Spiels, Textblock/Bild (Spielerklärung), 
+pro team: Siegpunkte, Spieler, Punkte (pro Spieler/Team), Antworten (pro Spieler)
+Antworten der Spieler auf Textblock anzeigen einzeln
+Infoleiste (Notizen von GM/ Stoppuhr, etc)
+
+Zufallsgenerator (+Anzeige im Textblock)
+Spieler Zufallsgenerator/Buzzer (+anzeigen/ markieren)
+Umfragen abspeichern
+
+Speichern/Laden
+
+Funktion mit GM App:
+---------------------
+Punktevergabe
+abfruf vergangener umfragen
+team unbenennen
+zufallsgenerator starten
+umfrage starten
+
+
+
