@@ -105,21 +105,21 @@ public class MainFrame extends Application {
 		gameTxtPane = new VBox();
 		gamePane.getChildren().add(gameTxtPane);
 		
-		gameText[0] = new Label("Titel des Spiels und Untertitel");
+		gameText[0] = new Label("Titel des Spiels steht hier");
 		gameText[0].setWrapText(true);
-		gameText[0].setLineSpacing(0);
 		gameText[0].setAlignment(Pos.TOP_CENTER);
 		gameText[0].setTextAlignment(TextAlignment.CENTER);		
 		gameTxtPane.getChildren().add(gameText[0]);
 		
 		gameText[1] = new Label("Hier könnte die Beschreibung des Spiels stehen. Diese kann auch sehr ausführlich sein, da dafür genug platz ist.");
 		gameText[1].setWrapText(true);
-		gameText[1].setLineSpacing(0);
 		gameText[1].setAlignment(Pos.TOP_CENTER);
 		gameText[1].setTextAlignment(TextAlignment.JUSTIFY);
 		gameTxtPane.getChildren().add(gameText[1]);
 		
-		gameText[2] = new Label();
+		gameText[2] = new Label("00:00:00\t00:00:00");
+		gameText[2].setAlignment(Pos.BOTTOM_CENTER);
+		gameText[2].setTextAlignment(TextAlignment.CENTER);
 		gameTxtPane.getChildren().add(gameText[2]);
 		
 		
@@ -193,11 +193,13 @@ public class MainFrame extends Application {
 			
 			
 //			teamPlayerEachPane[i][2].setStyle("-fx-background-color: black;");
-			gameText[0].setStyle("-fx-background-color: red;");
+//			gameText[0].setStyle("-fx-background-color: red;");
 //			gameText[1].setStyle("-fx-background-color: blue;");
 //			gameText[2].setStyle("-fx-background-color: white;");
 //			gameTxtPane.setStyle("-fx-background-color: rgb(0, 80, 0, 0.5);");
 //			gameTxtTitlePane.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058);");
+			
+			gameText[1].setText("Hier könnte die Beschreibung des Spiels stehen. Diese kann auch sehr lang sein, da sie dann immernoch dargestellt wird. Aufgrund der automatischen Schriftgrößenänderung stellt dies daher kein Problem dar. Sollte die Beschreibung allerding viel zu lang sein, dann könnte es sein dass der Text so klein ist, dass man ihn nicht mehr lesen kann. Allerdings müsste die Beschreibung dafür schon ziemlich lange sein oder die Auflösung des Bildschirms sehr gering.");
 		}
 		
 		root.setLeft(teamPane[0]);
@@ -249,12 +251,30 @@ public class MainFrame extends Application {
 		return Font.font("Comic Sans MS", FontWeight.BOLD, fontSize);		
 	}
 	
-	private Font createFontPaper () {
-		return Font.font("Old English Text MT", FontWeight.NORMAL, (2.0/3.0) * teamNameText[0].getFont().getSize());
+	private Font createFontPaper (double fontSize) {
+		return Font.font("Old English Text MT", FontWeight.NORMAL, fontSize);
 	}
 	
-	private Font createFontPaperTitle () {
-		return Font.font("Old English Text MT", FontWeight.BOLD, teamNameText[0].getFont().getSize());
+	private Font createFontPaperHeading () {
+		return createFontPaper(teamNameText[0].getFont().getSize());
+	}
+	
+	private Font createFontPaperGame (String txt) {
+		double fontWidth = 0.45;		//Width of a character with font-Size 1
+		double fontHeight = 1.25;	//Height of a character with font-Size 1
+		double maxFontSize = (2.0/3.0) * teamNameText[0].getFont().getSize();
+		int numberOfLinesTitle = gameText[0].getText().length() / (int) (gameText[0].getPrefWidth() / (gameText[0].getFont().getSize() * fontWidth)) + 1;
+		double width = gameText[0].getPrefWidth();
+		double height = this.height - 2 * StackPane.getMargin(gameTxtPane).getTop() - (numberOfLinesTitle * gameText[0].getFont().getSize() + maxFontSize) * fontHeight;
+		double fontSize = Math.sqrt((height * width) / (txt.length() * fontWidth * fontHeight));
+		return createFontPaper (Math.min(maxFontSize, fontSize));
+		
+		//height = numberOfLines * fontSize * fontHeight
+		//width = (text.length * fontSize * fontWidth) / numberOfLines
+	}
+	
+	private Font createFontPaperBottom () {
+		return Font.font("Old English Text MT", FontWeight.NORMAL, (2.0/3.0) * teamNameText[0].getFont().getSize());
 	}
 	
 	private double calcHeightOfFont (Label TextLabel) {
@@ -339,9 +359,11 @@ public class MainFrame extends Application {
 		}
 		
 		gameText[0].setPrefWidth(width / 2 - 2 * StackPane.getMargin(gameTxtPane).getLeft());
-		gameText[0].setFont(createFontPaperTitle());
-		gameText[0].setPrefHeight(calcHeightOfFont(gameText[0]));
-		gameText[1].setFont(createFontPaper());		
+		gameText[0].setFont(createFontPaperHeading());
+		gameText[2].setPrefWidth(gameText[0].getPrefWidth());
+		gameText[2].setFont(createFontPaperBottom());
+		gameText[1].setFont(createFontPaperGame(gameText[1].getText()));
+		
 		
 	}
 	
