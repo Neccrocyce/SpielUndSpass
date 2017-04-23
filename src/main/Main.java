@@ -8,12 +8,12 @@ public class Main {
 		MainFrame.setNumOfPlayers(8);
 		new FrameStarter(args).start();
 		
-		while (MainFrame.getInstance() == null) {
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-			}
-		}
-		MainFrame.getInstance().setScore(0, 30000);
+//		while (MainFrame.getInstance() == null) {
+//			try {
+//				Thread.sleep(10000);
+//			} catch (InterruptedException e) {
+//			}
+//		}
+//		MainFrame.getInstance().setScore(0, 30000);
 	}
 }

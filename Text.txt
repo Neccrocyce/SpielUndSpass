@@ -1,0 +1,11 @@
+Computer sind weiblich:
+sie trotz einer Menge Daten ahnungslos sind.
+sie verstehen, was du sagst, aber nicht was du meinst.
+wenn sie gefragt werden, was nicht stimmt, antworten sie: "nichts".
+sie mit Riesengeschwindigkeit Fehler machen.
+alles Mögliche an verschiedenen Plätzen verstauen.
+sie tun, was du willst, wenn du die richtigen Knöpfe drückst.
+plötzlich alles falsch ist, obwohl Du seit Jahren das Gleiche machst
+
+-------------
+Ein Systemadministrator erhält von einer Firma die Beschwerde, dass ihr Netzwerk öfters zusammenbricht. Und zwar immer Freitags zwischen 13.40 und 14.00. Jede Woche das gleiche, man kann die Uhr danach stellen. Der Admin macht sich auf die Socken, checkt alle Rechner und den Server. Das Netz ist tiptop eingerichtet, alles läuft. Er kann nichts erkennen. Also beschließt er, sich Freitags in den Serverraum zubegeben, vor den Server zu setzen und auf 13.40 zu warten. Punkt 13.40 geht die Tür auf, herein kommt die Putzfrau, zieht den Stecker aus dem Server, steckt ihren Staubsauger ein und saugt den Teppich.
