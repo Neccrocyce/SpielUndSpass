@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,20 +14,36 @@ public class MyLogger {
 	private static List<String[]> log = new ArrayList<>();
 	private static int maxLogs = -1;
 	private static String fileName = "Log";
+	private static String directory = MyLogger.class.getResource("").getPath() + "logs";
 	private static int rotations = -1;
 	private static MyLog mainClass;	
 	
 	/**
 	 * sets the values - has to be called first
+	 * <pre>
 	 * @param mainClass the class which implements MyLog.java
-	 * @param maxLogs maximum number of logs to be saved (-1: infinite)
-	 * @param rotations number of logFiles which will be saved before rotating (-1: infinite)
+	 * @param maxLogs maximum number of logs to be saved
+	 *        -1: infinite
+	 *        default: -1
+	 * @param rotations number of logFiles which will be saved before rotating 
+	 *        -1: infinite
+	 *        default -1
+	 * @param directory directory where the logfiles will be saved
+	 *        default ~/logs
+	 * </pre>
 	 */
-	public static void setUp (MyLog mainClass, int maxLogs, int rotations) {
+	public static void setUp (MyLog mainClass, int maxLogs, int rotations, String directory) {
 		MyLogger.mainClass = mainClass;
 		MyLogger.maxLogs = maxLogs;
-		MyLogger.rotations = rotations;
-		fileName = mainClass.getClass().getName().toLowerCase();
+		MyLogger.rotations = rotations;		
+		if (!directory.equals("")) {
+			MyLogger.directory = directory;MyLogger.directory = directory;
+		}
+		fileName = mainClass.getClass().getSimpleName().toLowerCase();
+	}
+	
+	public static void setUp (MyLog mainClass) {
+		setUp(mainClass, -1, -1, "");
 	}
 	
 	private static void logMissingMainClass () {
@@ -62,12 +80,13 @@ public class MyLogger {
 			logMissingMainClass();
 		}
 		log.add(entry);
+		mainClass.sendLog(entry[0] + ": " + entry[1]);
 		reduceLog();
 		save();
 	}
 	
 	private static void reduceLog () {
-		while (log.size() > maxLogs) {
+		while (maxLogs != -1 && log.size() > maxLogs) {
 			log.remove(0);
 		}
 	}
@@ -106,33 +125,44 @@ public class MyLogger {
 	}
 	
 	private static void save () {
+		if (!new File(directory).exists()) {
+			new File(directory).mkdirs();
+		}
+		String logFile = directory + "/" + fileName + ".log";
 		FileWriter w = null;
 		try {
-			w = new FileWriter(mainClass.getLogDirectory() + fileName + ".log");
+			if (new File(logFile).exists()) {
+				Files.copy(new File(logFile).toPath(), new File(logFile + ".backup").toPath(),StandardCopyOption.REPLACE_EXISTING);
+			}
+			w = new FileWriter(logFile);
 			String content = getLogAll();
 			w.write(content, 0, content.length());
 			w.close();
+			new File(logFile + ".backup").delete();
 		} catch (IOException e) {
-			//TODO
+			mainClass.sendErrMsg("ERROR: Cannot write logs to file");
+			e.printStackTrace();
 		} 
 	}
 	
 	public static void load () {
-		if (!new File(fileName).exists()) {
+		String logFile = directory + "/" + fileName + ".log";
+		if (!new File(logFile).exists()) {
 			return;
 		}
 		String in = "";
 		FileReader r = null;
 		Scanner s = null;
 		try {
-			r = new FileReader(fileName);
+			r = new FileReader(logFile);
 			s = new Scanner(r);
 			s.useDelimiter("\\Z");
 			in = s.next();
 			s.close();
 			
 		} catch (IOException e) {
-			//TODO
+			mainClass.sendErrMsg("ERROR: Cannot load logfiles");
+			return;
 		}
 		
 		//split each line
@@ -140,16 +170,16 @@ public class MyLogger {
 		
 		for (String string : obj) {
 			String level = string.split(": ")[0];
-			log.add(new String[] {level, string.substring(level.length())});
+			log.add(new String[] {level, string.substring(level.length() + 2)});
 		}
 	}
 	
 	public static void rotate () {
-		File[] files = new File(mainClass.getLogDirectory()).listFiles(f -> f.getName().startsWith(fileName));
-		for (int i = 0; i < files.length; i++) {
-			files[i].renameTo(new File(fileName + ".log." + i));
+		File[] files = new File(directory).listFiles(f -> f.getName().startsWith(fileName));
+		for (int i = files.length; i > 0; i--) {
+			files[i-1].renameTo(new File(directory + "/" + fileName + ".log." + i));
 		}
-		if (files.length > rotations) {
+		if (rotations != -1 && files.length > rotations) {
 			files[files.length].delete();
 		}
 	}

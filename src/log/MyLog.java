@@ -8,8 +8,14 @@ public interface MyLog {
 	public void stop ();
 	
 	/**
-	 * 
-	 * @return the directory where the logs will be saved
+	 * this method will be call when the logs cannot be written to a file
+	 * @param msg
 	 */
-	public String getLogDirectory ();
+	public void sendErrMsg (String msg);
+	
+	/**
+	 * this method will be called any time something is logged.
+	 * @param msg
+	 */
+	public void sendLog (String msg);
 }

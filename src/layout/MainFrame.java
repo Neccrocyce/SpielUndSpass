@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import log.MyLogger;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -61,6 +62,7 @@ public class MainFrame extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		MyLogger.logInfo("Start: Open Window");
 		//set fontPaperWidth
 		fontPaperWidth = new double[256];
 		Text tmpTxt = new Text();
@@ -240,6 +242,8 @@ public class MainFrame extends Application {
 				teamPlayerNameText[i][j][0].setText("P\nl\n" + j);
 				teamPlayerNameText[i][j][1].setText("0");
 			}
+			
+			MyLogger.logInfo("Finished: Open Window");
 			
 			/*
 			 * TODO delete
