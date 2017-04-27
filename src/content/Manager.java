@@ -3,6 +3,8 @@ package content;
 import java.util.ArrayList;
 import java.util.List;
 
+import layout.MainFrame;
+
 public class Manager {
 	private List<Poll> polls;
 	private Team[] teams;
@@ -23,6 +25,7 @@ public class Manager {
 	 */
 	public void renameTeam (int team, String name) {
 		teams[team].setName(name);
+		MainFrame.getInstance().setTeamName(team, name);
 	}
 	
 	

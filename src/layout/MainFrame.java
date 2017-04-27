@@ -508,6 +508,11 @@ public class MainFrame extends Application {
 		return root;
 	}
 	
+	public void close () {
+		final Stage stage = (Stage) root.getScene().getWindow();
+		Platform.runLater(() -> {stage.close();});
+	}
+	
 	/*
 	 * Setter:
 	 * team (int): 0: Team1, 1; Team2
