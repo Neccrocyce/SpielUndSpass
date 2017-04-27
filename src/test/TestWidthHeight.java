@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import layout.MainFrame;
-<<<<<<< HEAD
 
 public class TestWidthHeight {
 	private static Pane root;
@@ -20,17 +19,6 @@ public class TestWidthHeight {
 	@BeforeClass
 	public static void init () {
 		TestFrameStarter.start();		
-=======
-import main.Main;
-
-public class TestWidthHeight {
-	private static Pane root;
-	private double delta = 20;
-	
-	@BeforeClass
-	public static void init () {
-		Main.main(new String[]{});		
->>>>>>> branch 'Server' of https://github.com/Neccrocyce/SpielUndSpass.git
 		while (MainFrame.getInstance() == null) {
 			try {
 				Thread.sleep(1000);
