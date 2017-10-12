@@ -135,7 +135,7 @@ public class MainFrame extends Application {
 		gameText[0].setTextAlignment(TextAlignment.CENTER);		
 		gameTxtPane.setTop(gameText[0]);
 		
-		gameText[1] = new Label("Hier könnte die Beschreibung des Spiels stehen. Diese kann auch sehr ausführlich sein, da dafür genug platz ist.");
+		gameText[1] = new Label("Hier kÃ¶nnte die Beschreibung des Spiels stehen. Diese kann auch sehr ausfÃ¼hrlich sein, da dafÃ¼r genug platz ist.");
 		gameText[1].setId("gameText1");
 		gameText[1].setWrapText(true);
 		gameText[1].setTextAlignment(TextAlignment.JUSTIFY);
@@ -248,9 +248,9 @@ public class MainFrame extends Application {
 			/*
 			 * TODO delete
 			 */
-			gameText[1].setText("Hier könnte die Beschreibung des Spiels stehen. Diese kann auch sehr lang sein, da sie dann immernoch dargestellt wird. Aufgrund der automatischen Schriftgrößenänderung stellt dies daher kein Problem dar. Sollte die Beschreibung allerdings viel zu lang sein, dann könnte es sein, dass der Text so klein ist, dass man ihn nicht mehr lesen kann. Allerdings müsste die Beschreibung dafür schon ziemlich lange sein oder die Auflösung des Bildschirms sehr gering.");
+			gameText[1].setText("Hier kÃ¶nnte die Beschreibung des Spiels stehen. Diese kann auch sehr lang sein, da sie dann immernoch dargestellt wird. Aufgrund der automatischen SchriftgrÃ¶ÃŸenÃ¤nderung stellt dies daher kein Problem dar. Sollte die Beschreibung allerdings viel zu lang sein, dann kÃ¶nnte es sein, dass der Text so klein ist, dass man ihn nicht mehr lesen kann. Allerdings mÃ¼sste die Beschreibung dafÃ¼r schon ziemlich lange sein oder die AuflÃ¶sung des Bildschirms sehr gering.");
 			gameText[0].setText("Beschwerde an Systemadministrator");
-			gameText[1].setText("Ein Systemadministrator erhält von einer Firma die Beschwerde, dass ihr Netzwerk öfters zusammenbricht. Und zwar immer Freitags zwischen 13.40 und 14.00. Jede Woche das gleiche, man kann die Uhr danach stellen.\nDer Admin macht sich auf die Socken, checkt alle Rechner und den Server. Das Netz ist tiptop eingerichtet, alles läuft. Er kann nichts erkennen. Also beschließt er, sich Freitags in den Serverraum zubegeben, vor den Server zu setzen und auf 13.40 zu warten. Punkt 13.40 geht die Tür auf, herein kommt die Putzfrau, zieht den Stecker aus dem Server, steckt ihren Staubsauger ein und saugt den Teppich.");
+			gameText[1].setText("Ein Systemadministrator erhÃ¤lt von einer Firma die Beschwerde, dass ihr Netzwerk Ã¶fters zusammenbricht. Und zwar immer Freitags zwischen 13.40 und 14.00. Jede Woche das gleiche, man kann die Uhr danach stellen.\nDer Admin macht sich auf die Socken, checkt alle Rechner und den Server. Das Netz ist tiptop eingerichtet, alles lÃ¤uft. Er kann nichts erkennen. Also beschlieÃŸt er, sich Freitags in den Serverraum zubegeben, vor den Server zu setzen und auf 13.40 zu warten. Punkt 13.40 geht die TÃ¼r auf, herein kommt die Putzfrau, zieht den Stecker aus dem Server, steckt ihren Staubsauger ein und saugt den Teppich.");
 			/*
 			 * 
 			 */

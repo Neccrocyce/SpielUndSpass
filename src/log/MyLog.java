@@ -8,7 +8,7 @@ public interface MyLog {
 	public void stop ();
 	
 	/**
-	 * this method will be call when the logs cannot be written to a file
+	 * this method will be called when the logs cannot be written to a file
 	 * @param msg
 	 */
 	public void sendErrMsg (String msg);

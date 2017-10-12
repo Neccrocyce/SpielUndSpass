@@ -9,7 +9,7 @@ public class SpielUndSpassServer implements MyLog{
 	public static final String DIRECTORY = "";
 	
 	public static void main (String[] args) {
-		MyLogger.setUp(new SpielUndSpassServer());
+		MyLogger.setUp(new SpielUndSpassServer(), -1, 10, "");
 		MyLogger.rotate();
 		MyLogger.logInfo("Start: Initializing Server");
 		String[] args2 = new String[] {"8", "1200", "675"};

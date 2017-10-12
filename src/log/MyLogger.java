@@ -31,6 +31,7 @@ public class MyLogger {
 	 * @param directory directory where the logfiles will be saved
 	 *        default ~/logs
 	 * </pre>
+	 * @throws NullPointerException if mainClass is null
 	 */
 	public static void setUp (MyLog mainClass, int maxLogs, int rotations, String directory) {
 		MyLogger.mainClass = mainClass;
@@ -40,6 +41,7 @@ public class MyLogger {
 			MyLogger.directory = directory;MyLogger.directory = directory;
 		}
 		fileName = mainClass.getClass().getSimpleName().toLowerCase();
+		save();
 	}
 	
 	public static void setUp (MyLog mainClass) {
@@ -47,7 +49,9 @@ public class MyLogger {
 	}
 	
 	private static void logMissingMainClass () {
-		logWarning("mainClass has not been set");
+		log.add(new String[] {"WARNING", "MyLogger has not been set up yet"});
+		reduceLog();
+		save();
 	}
 	
 	public static void logInfo (String msg) {
@@ -71,16 +75,17 @@ public class MyLogger {
 		try {
 			mainClass.stop();
 		} catch (NullPointerException e) {
-			log(new String[] {"CRITICAL", "Cannot stop application; mainClass has not been set yet"});
+			log(new String[] {"CRITICAL", "Cannot stop application; MyLogger has not been set up yet"});
 		}
 	}
 	
 	private static void log (String[] entry) {
 		if (mainClass == null) {
 			logMissingMainClass();
+		} else {
+			mainClass.sendLog(entry[0] + ": " + entry[1]);
 		}
-		log.add(entry);
-		mainClass.sendLog(entry[0] + ": " + entry[1]);
+		log.add(entry);		
 		reduceLog();
 		save();
 	}
@@ -140,7 +145,10 @@ public class MyLogger {
 			w.close();
 			new File(logFile + ".backup").delete();
 		} catch (IOException e) {
-			mainClass.sendErrMsg("ERROR: Cannot write logs to file");
+			if (mainClass == null) {
+				throw new IllegalStateException("MyLogger has not been set up");
+			}
+			mainClass.sendErrMsg("ERROR: Cannot write logs to file (" + e.toString());
 			e.printStackTrace();
 		} 
 	}
@@ -161,6 +169,9 @@ public class MyLogger {
 			s.close();
 			
 		} catch (IOException e) {
+			if (mainClass == null) {
+				throw new IllegalStateException("MyLogger has not been set up");
+			}
 			mainClass.sendErrMsg("ERROR: Cannot load logfiles");
 			return;
 		}
